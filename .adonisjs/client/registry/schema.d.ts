@@ -59,4 +59,199 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['destroy']>>>
     }
   }
+  'auth.sync': {
+    methods: ["POST"]
+    pattern: '/auth/sync'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'auth.me': {
+    methods: ["GET","HEAD"]
+    pattern: '/auth/me'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'blogs.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/blogs'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'blogs.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/blogs/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'saved_blogs.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/saved/blogs'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'saved_blogs.store': {
+    methods: ["POST"]
+    pattern: '/saved/blogs'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'saved_blogs.destroy': {
+    methods: ["DELETE"]
+    pattern: '/saved/blogs/:blogId'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { blogId: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'videos.search': {
+    methods: ["GET","HEAD"]
+    pattern: '/videos/search'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'videos.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/videos/:videoId'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { videoId: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'saved_videos.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/saved/videos'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'saved_videos.store': {
+    methods: ["POST"]
+    pattern: '/saved/videos'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'saved_videos.unsave': {
+    methods: ["DELETE"]
+    pattern: '/saved/videos/:videoId'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { videoId: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'activities.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/activity'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'activities.store': {
+    methods: ["POST"]
+    pattern: '/activity'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'dashboard.stats': {
+    methods: ["GET","HEAD"]
+    pattern: '/dashboard/stats'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
 }

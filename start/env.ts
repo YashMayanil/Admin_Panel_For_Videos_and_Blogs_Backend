@@ -24,4 +24,33 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   // Session
   SESSION_DRIVER: Env.schema.enum(['cookie', 'memory', 'database'] as const),
+
+
+  //firebase schema 
+  FIREBASE_PROJECT_ID: Env.schema.string(),
+  FIREBASE_CLIENT_EMAIL: Env.schema.string(),
+  FIREBASE_PRIVATE_KEY: Env.schema.string(),
+
+  //pgsql schema 
+  DATABASE_URL: Env.schema.string(),
+
+  //youtube api schema
+  SERPAPI_API_KEY: Env.schema.string(),
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring database connection
+  |----------------------------------------------------------
+  */
+  DB_HOST: Env.schema.string({ format: 'host' }),
+  DB_PORT: Env.schema.number(),
+  DB_USER: Env.schema.string(),
+  DB_PASSWORD: Env.schema.string.optional(),
+  DB_DATABASE: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the limiter package
+  |----------------------------------------------------------
+  */
+  LIMITER_STORE: Env.schema.enum(['database', 'memory'] as const)
 })

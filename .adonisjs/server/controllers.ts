@@ -5,6 +5,13 @@
 
 export const controllers = {
   AccessTokens: () => import('#controllers/access_tokens_controller'),
+  Activity: () => import('#controllers/activity_controller'),
+  Auth: () => import('#controllers/auth_controller'),
+  Blog: () => import('#controllers/blog_controller'),
+  Dashboard: () => import('#controllers/dashboard_controller'),
   NewAccount: () => import('#controllers/new_account_controller'),
   Profile: () => import('#controllers/profile_controller'),
+  SaveBlog: () => import('#controllers/save_blog_controller'),
+  SaveVideo: () => import('#controllers/save_video_controller'),
+  Videos: () => import('#controllers/videos_controller'),
 }

@@ -7,19 +7,29 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class ActivitySchema extends BaseModel {
+  static $columns = ['contentId', 'contentType', 'contentUrl', 'id', 'lastViewedAt', 'thumbnail', 'title', 'userId'] as const
+  $columns = ActivitySchema.$columns
+  @column()
+  declare contentId: string
+  @column()
+  declare contentType: string
+  @column()
+  declare contentUrl: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column.dateTime()
+  declare lastViewedAt: DateTime
+  @column()
+  declare thumbnail: string | null
+  @column()
+  declare title: string
+  @column()
+  declare userId: number
+}
+
 export class AuthAccessTokenSchema extends BaseModel {
-  static $columns = [
-    'abilities',
-    'createdAt',
-    'expiresAt',
-    'hash',
-    'id',
-    'lastUsedAt',
-    'name',
-    'tokenableId',
-    'type',
-    'updatedAt',
-  ] as const
+  static $columns = ['abilities', 'createdAt', 'expiresAt', 'hash', 'id', 'lastUsedAt', 'name', 'tokenableId', 'type', 'updatedAt'] as const
   $columns = AuthAccessTokenSchema.$columns
   @column()
   declare abilities: string
@@ -43,19 +53,68 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class RateLimitSchema extends BaseModel {
+  static $columns = ['expire', 'key', 'points'] as const
+  $columns = RateLimitSchema.$columns
+  @column()
+  declare expire: bigint | number | null
+  @column({ isPrimary: true })
+  declare key: string
+  @column()
+  declare points: number
+}
+
+export class SavedBlogSchema extends BaseModel {
+  static $columns = ['blogId', 'body', 'createdAt', 'id', 'title', 'userId'] as const
+  $columns = SavedBlogSchema.$columns
+  @column()
+  declare blogId: number
+  @column()
+  declare body: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare title: string
+  @column()
+  declare userId: number
+}
+
+export class SavedVideoSchema extends BaseModel {
+  static $columns = ['channelName', 'createdAt', 'id', 'thumbnail', 'title', 'userId', 'videoId', 'videoUrl'] as const
+  $columns = SavedVideoSchema.$columns
+  @column()
+  declare channelName: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare thumbnail: string | null
+  @column()
+  declare title: string
+  @column()
+  declare userId: number
+  @column()
+  declare videoId: string
+  @column()
+  declare videoUrl: string
+}
+
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
+  static $columns = ['createdAt', 'email', 'firebaseUid', 'fullName', 'id', 'updatedAt'] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
   declare email: string
   @column()
+  declare firebaseUid: string
+  @column()
   declare fullName: string | null
   @column({ isPrimary: true })
   declare id: number
-  @column({ serializeAs: null })
-  declare password: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
+  declare updatedAt: DateTime
 }
