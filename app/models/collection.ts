@@ -1,5 +1,6 @@
 import { BaseModel, column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
+import { DateTime } from 'luxon'
 import User from '#models/user'
 import CollectionItem from '#models/collection_item'
 
@@ -18,6 +19,15 @@ export default class Collection extends BaseModel {
 
   @column()
   declare isDefault: boolean
+
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+
+  @column.dateTime()
+  declare deletedAt: DateTime | null
 
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>

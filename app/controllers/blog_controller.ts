@@ -4,13 +4,6 @@ import Domain from '#models/domain'
 import { DateTime } from 'luxon'
 import { createBlogValidator, updateBlogValidator } from '#validators/blog'
 
-interface BlogPost {
-  userId: number
-  id: number
-  title: string
-  body: string
-}
-
 // this controller if for fetching blogs from external api and doing pagination
 export default class BlogsController {
 
