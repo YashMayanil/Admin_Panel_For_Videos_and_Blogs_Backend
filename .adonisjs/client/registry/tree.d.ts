@@ -23,11 +23,9 @@ export interface ApiDefinition {
   blogs: {
     index: typeof routes['blogs.index']
     show: typeof routes['blogs.show']
-  }
-  savedBlogs: {
-    index: typeof routes['saved_blogs.index']
-    store: typeof routes['saved_blogs.store']
-    destroy: typeof routes['saved_blogs.destroy']
+    store: typeof routes['blogs.store']
+    update: typeof routes['blogs.update']
+    destroy: typeof routes['blogs.destroy']
   }
   videos: {
     search: typeof routes['videos.search']
@@ -44,5 +42,28 @@ export interface ApiDefinition {
   }
   dashboard: {
     stats: typeof routes['dashboard.stats']
+  }
+  domain: {
+    index: typeof routes['domain.index']
+    show: typeof routes['domain.show']
+    store: typeof routes['domain.store']
+    update: typeof routes['domain.update']
+    destroy: typeof routes['domain.destroy']
+  }
+  series: {
+    index: typeof routes['series.index']
+    store: typeof routes['series.store']
+    show: typeof routes['series.show']
+    update: typeof routes['series.update']
+    destroy: typeof routes['series.destroy']
+  }
+  collections: {
+    index: typeof routes['collections.index']
+    show: typeof routes['collections.show']
+    store: typeof routes['collections.store']
+    update: typeof routes['collections.update']
+    destroy: typeof routes['collections.destroy']
+    addItem: typeof routes['collections.add_item']
+    removeItem: typeof routes['collections.remove_item']
   }
 }

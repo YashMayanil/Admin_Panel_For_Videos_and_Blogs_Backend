@@ -1,10 +1,11 @@
-
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
   protected tableName = 'activities'
 
   async up() {
+    this.schema.dropTable(this.tableName)
+
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
 
@@ -16,16 +17,17 @@ export default class extends BaseSchema {
         .inTable('users')
         .onDelete('CASCADE')
 
-      table.string('content_type', 20).notNullable()
-      table.string('content_id', 100).notNullable()
-      table.string('title', 500).notNullable()
-      table.text('thumbnail').nullable()
-      table.text('content_url').notNullable()
+      table.string('activities_type', 50).notNullable()
+      table.string('action', 50).notNullable()
 
-      table.timestamp('last_viewed_at', { useTz: true }).notNullable().defaultTo(this.now())
+      table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
+      table.timestamp('updated_at', { useTz: true }).notNullable().defaultTo(this.now())
+      table.timestamp('deleted_at', { useTz: true }).nullable()
 
-      table.unique(['user_id', 'content_type', 'content_id'])
-      table.index(['user_id', 'last_viewed_at'])
+      table.integer('activities_id').unsigned().notNullable()
+
+      table.index(['user_id', 'created_at'])
+      table.index(['activities_type', 'activities_id'])
     })
   }
 
