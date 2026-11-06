@@ -1,3 +1,5 @@
+// this controller is about to delete
+
 import type { HttpContext } from '@adonisjs/core/http'
 import env from '#start/env'
 import { searchVideosValidator, showVideoValidator } from '#validators/videos'

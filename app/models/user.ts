@@ -10,6 +10,7 @@ import Activity from '#models/activity'
 import SeriesVideosProgress from '#models/series_videos_progress'
 import UserChapterProgress from '#models/user_chapter_progress'
 import UserAudioProgress from '#models/user_audio_progress'
+import UserBlogProgress from '#models/user_blog_progress'
 
 export default class User extends compose(UserSchema, withAuthFinder(hash)) {
   static accessTokens = DbAccessTokensProvider.forModel(User)
@@ -37,4 +38,8 @@ export default class User extends compose(UserSchema, withAuthFinder(hash)) {
 
   @hasMany(() => UserAudioProgress)
   declare audioProgress: HasMany<typeof UserAudioProgress>
+
+  @hasMany(() => UserBlogProgress)
+  declare blogProgress: HasMany<typeof UserBlogProgress>
+
 }

@@ -154,44 +154,6 @@ export class RateLimitSchema extends BaseModel {
   declare points: number
 }
 
-export class SavedBlogSchema extends BaseModel {
-  static $columns = ['blogId', 'body', 'createdAt', 'id', 'title', 'userId'] as const
-  $columns = SavedBlogSchema.$columns
-  @column()
-  declare blogId: number
-  @column()
-  declare body: string | null
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-  @column({ isPrimary: true })
-  declare id: number
-  @column()
-  declare title: string
-  @column()
-  declare userId: number
-}
-
-export class SavedVideoSchema extends BaseModel {
-  static $columns = ['channelName', 'createdAt', 'id', 'thumbnail', 'title', 'userId', 'videoId', 'videoUrl'] as const
-  $columns = SavedVideoSchema.$columns
-  @column()
-  declare channelName: string | null
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-  @column({ isPrimary: true })
-  declare id: number
-  @column()
-  declare thumbnail: string | null
-  @column()
-  declare title: string
-  @column()
-  declare userId: number
-  @column()
-  declare videoId: string
-  @column()
-  declare videoUrl: string
-}
-
 export class SeriesSchema extends BaseModel {
   static $columns = ['createdAt', 'deletedAt', 'description', 'domainId', 'id', 'isHidden', 'previewVideo', 'tags', 'thumbnail', 'title', 'updatedAt', 'videoDuration', 'videoSrc'] as const
   $columns = SeriesSchema.$columns
@@ -224,12 +186,14 @@ export class SeriesSchema extends BaseModel {
 }
 
 export class SeriesVideosProgressSchema extends BaseModel {
-  static $columns = ['createdAt', 'id', 'seriesId', 'updatedAt', 'userId', 'videoProgress'] as const
+  static $columns = ['createdAt', 'id', 'lastPositionSeconds', 'seriesId', 'updatedAt', 'userId', 'videoProgress'] as const
   $columns = SeriesVideosProgressSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column({ isPrimary: true })
   declare id: number
+  @column()
+  declare lastPositionSeconds: number
   @column()
   declare seriesId: number
   @column.dateTime({ autoCreate: true, autoUpdate: true })
@@ -268,6 +232,27 @@ export class UserAudioProgressSchema extends BaseModel {
   declare id: number
   @column()
   declare pageId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare userId: number
+}
+
+export class UserBlogProgressSchema extends BaseModel {
+  static $columns = ['blogId', 'createdAt', 'id', 'isCompleted', 'lastScrollPosition', 'readingProgress', 'updatedAt', 'userId'] as const
+  $columns = UserBlogProgressSchema.$columns
+  @column()
+  declare blogId: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare isCompleted: boolean
+  @column()
+  declare lastScrollPosition: number
+  @column()
+  declare readingProgress: number
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
   @column()

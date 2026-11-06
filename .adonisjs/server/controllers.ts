@@ -13,6 +13,7 @@ export const controllers = {
   Domains: () => import('#controllers/domains_controller'),
   NewAccount: () => import('#controllers/new_account_controller'),
   Profile: () => import('#controllers/profile_controller'),
+  Progresses: () => import('#controllers/progresses_controller'),
   SaveBlog: () => import('#controllers/save_blog_controller'),
   SaveVideo: () => import('#controllers/save_video_controller'),
   Series: () => import('#controllers/series_controller'),

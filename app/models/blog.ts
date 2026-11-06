@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Domain from '#models/domain'
+import UserBlogProgress from '#models/user_blog_progress'
 
 export default class Blog extends BaseModel {
   @column({ isPrimary: true })
@@ -42,4 +43,7 @@ export default class Blog extends BaseModel {
 
   @belongsTo(() => Domain)
   declare domain: BelongsTo<typeof Domain>
+
+  @hasMany(() => UserBlogProgress)
+  declare userProgress: HasMany<typeof UserBlogProgress>
 }

@@ -60,7 +60,7 @@ export default class DomainController {
     }
 
     // this controller is for creating a domain.
-    //handling diplicate name and slug
+    //handling duplicate name and slug
     async store({ request, response }: HttpContext) {
         try {
             // 1. Validate incoming data

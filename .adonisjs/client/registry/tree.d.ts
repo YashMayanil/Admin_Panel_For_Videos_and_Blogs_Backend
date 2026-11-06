@@ -2,23 +2,19 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  newAccount: {
+    store: typeof routes['new_account.store']
+  }
+  accessTokens: {
+    store: typeof routes['access_tokens.store']
+    destroy: typeof routes['access_tokens.destroy']
+  }
   auth: {
-    newAccount: {
-      store: typeof routes['auth.new_account.store']
-    }
-    accessTokens: {
-      store: typeof routes['auth.access_tokens.store']
-    }
     sync: typeof routes['auth.sync']
     me: typeof routes['auth.me']
   }
   profile: {
-    profile: {
-      show: typeof routes['profile.profile.show']
-    }
-    accessTokens: {
-      destroy: typeof routes['profile.access_tokens.destroy']
-    }
+    show: typeof routes['profile.show']
   }
   blogs: {
     index: typeof routes['blogs.index']
@@ -65,5 +61,11 @@ export interface ApiDefinition {
     destroy: typeof routes['collections.destroy']
     addItem: typeof routes['collections.add_item']
     removeItem: typeof routes['collections.remove_item']
+  }
+  progress: {
+    getVideoProgress: typeof routes['progress.get_video_progress']
+    updateVideoProgress: typeof routes['progress.update_video_progress']
+    getBlogProgress: typeof routes['progress.get_blog_progress']
+    updateBlogProgress: typeof routes['progress.update_blog_progress']
   }
 }

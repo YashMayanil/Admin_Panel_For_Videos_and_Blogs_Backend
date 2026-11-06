@@ -14,7 +14,7 @@ export default class ActivitiesController {
       if (!user) {
         return response.notFound({ message: 'User not found' })
       }
-
+      //this is for pagination logic showing only 20 activity attime 
       const limit = Math.min(Math.max(Number(request.input('limit', 20)) || 20, 1), 100)
 
       const activities = await db
