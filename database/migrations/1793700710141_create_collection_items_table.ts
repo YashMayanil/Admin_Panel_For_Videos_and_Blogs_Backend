@@ -1,29 +1,30 @@
-
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'saved_blogs'
+  protected tableName = 'collection_items'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
 
       table
-        .integer('user_id')
+        .integer('collection_id')
         .unsigned()
         .notNullable()
         .references('id')
-        .inTable('users')
+        .inTable('collections')
         .onDelete('CASCADE')
 
-      table.integer('blog_id').unsigned().notNullable()
-      table.string('title', 500).notNullable()
-      table.text('body').nullable()
+      table.string('content_type', 50).notNullable()
+      table.string('content_id', 100).notNullable()
+
+      table.integer('progress').notNullable().defaultTo(0)
 
       table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
+      table.timestamp('updated_at', { useTz: true }).notNullable().defaultTo(this.now())
+      table.timestamp('deleted_at', { useTz: true }).nullable()
 
-      table.unique(['user_id', 'blog_id'])
-      table.index(['user_id', 'created_at'])
+      table.index(['content_type', 'content_id'])
     })
   }
 

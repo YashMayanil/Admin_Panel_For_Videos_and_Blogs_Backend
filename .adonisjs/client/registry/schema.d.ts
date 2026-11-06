@@ -7,7 +7,7 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'auth.new_account.store': {
+  'new_account.store': {
     methods: ["POST"]
     pattern: '/api/v1/auth/signup'
     types: {
@@ -20,7 +20,7 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'auth.access_tokens.store': {
+  'access_tokens.store': {
     methods: ["POST"]
     pattern: '/api/v1/auth/login'
     types: {
@@ -33,35 +33,9 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'profile.profile.show': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/v1/account/profile'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['show']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['show']>>>
-      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['show']>>>
-    }
-  }
-  'profile.access_tokens.destroy': {
-    methods: ["POST"]
-    pattern: '/api/v1/account/logout'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['destroy']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['destroy']>>>
-      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['destroy']>>>
-    }
-  }
   'auth.sync': {
     methods: ["POST"]
-    pattern: '/auth/sync'
+    pattern: '/api/v1/auth/sync'
     types: {
       body: {}
       paramsTuple: []
@@ -74,7 +48,7 @@ export interface Registry {
   }
   'auth.me': {
     methods: ["GET","HEAD"]
-    pattern: '/auth/me'
+    pattern: '/api/v1/auth/me'
     types: {
       body: {}
       paramsTuple: []
@@ -85,9 +59,35 @@ export interface Registry {
       rawResponse: ExtractRawResponse<unknown>
     }
   }
+  'profile.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/account/profile'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['show']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['show']>>>
+    }
+  }
+  'access_tokens.destroy': {
+    methods: ["POST"]
+    pattern: '/api/v1/account/logout'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['destroy']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['destroy']>>>
+    }
+  }
   'blogs.index': {
     methods: ["GET","HEAD"]
-    pattern: '/blogs'
+    pattern: '/api/v1/blogs'
     types: {
       body: {}
       paramsTuple: []
@@ -100,7 +100,7 @@ export interface Registry {
   }
   'blogs.show': {
     methods: ["GET","HEAD"]
-    pattern: '/blogs/:id'
+    pattern: '/api/v1/blogs/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -111,22 +111,9 @@ export interface Registry {
       rawResponse: ExtractRawResponse<unknown>
     }
   }
-  'saved_blogs.index': {
-    methods: ["GET","HEAD"]
-    pattern: '/saved/blogs'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: unknown
-      errorResponse: unknown
-      rawResponse: ExtractRawResponse<unknown>
-    }
-  }
-  'saved_blogs.store': {
+  'blogs.store': {
     methods: ["POST"]
-    pattern: '/saved/blogs'
+    pattern: '/api/v1/blogs'
     types: {
       body: {}
       paramsTuple: []
@@ -137,13 +124,26 @@ export interface Registry {
       rawResponse: ExtractRawResponse<unknown>
     }
   }
-  'saved_blogs.destroy': {
-    methods: ["DELETE"]
-    pattern: '/saved/blogs/:blogId'
+  'blogs.update': {
+    methods: ["PUT"]
+    pattern: '/api/v1/blogs/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
-      params: { blogId: ParamValue }
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'blogs.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/blogs/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
       query: {}
       response: unknown
       errorResponse: unknown
@@ -152,7 +152,7 @@ export interface Registry {
   }
   'videos.search': {
     methods: ["GET","HEAD"]
-    pattern: '/videos/search'
+    pattern: '/api/v1/videos/search'
     types: {
       body: {}
       paramsTuple: []
@@ -165,7 +165,7 @@ export interface Registry {
   }
   'videos.show': {
     methods: ["GET","HEAD"]
-    pattern: '/videos/:videoId'
+    pattern: '/api/v1/videos/:videoId'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -178,7 +178,7 @@ export interface Registry {
   }
   'saved_videos.index': {
     methods: ["GET","HEAD"]
-    pattern: '/saved/videos'
+    pattern: '/api/v1/saved/videos'
     types: {
       body: {}
       paramsTuple: []
@@ -191,7 +191,7 @@ export interface Registry {
   }
   'saved_videos.store': {
     methods: ["POST"]
-    pattern: '/saved/videos'
+    pattern: '/api/v1/saved/videos'
     types: {
       body: {}
       paramsTuple: []
@@ -204,7 +204,7 @@ export interface Registry {
   }
   'saved_videos.unsave': {
     methods: ["DELETE"]
-    pattern: '/saved/videos/:videoId'
+    pattern: '/api/v1/saved/videos/:videoId'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -217,7 +217,7 @@ export interface Registry {
   }
   'activities.index': {
     methods: ["GET","HEAD"]
-    pattern: '/activity'
+    pattern: '/api/v1/activity'
     types: {
       body: {}
       paramsTuple: []
@@ -230,7 +230,7 @@ export interface Registry {
   }
   'activities.store': {
     methods: ["POST"]
-    pattern: '/activity'
+    pattern: '/api/v1/activity'
     types: {
       body: {}
       paramsTuple: []
@@ -243,11 +243,284 @@ export interface Registry {
   }
   'dashboard.stats': {
     methods: ["GET","HEAD"]
-    pattern: '/dashboard/stats'
+    pattern: '/api/v1/dashboard/stats'
     types: {
       body: {}
       paramsTuple: []
       params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'domain.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/domains'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'domain.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/domains/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'domain.store': {
+    methods: ["POST"]
+    pattern: '/api/v1/domains'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'domain.update': {
+    methods: ["PUT"]
+    pattern: '/api/v1/domains/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'domain.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/domains/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'series.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/series'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'series.store': {
+    methods: ["POST"]
+    pattern: '/api/v1/series'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'series.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/series/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'series.update': {
+    methods: ["PUT"]
+    pattern: '/api/v1/series/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'series.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/series/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'collections.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/collections'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'collections.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/collections/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'collections.store': {
+    methods: ["POST"]
+    pattern: '/api/v1/collections'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'collections.update': {
+    methods: ["PUT"]
+    pattern: '/api/v1/collections/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'collections.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/collections/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'collections.add_item': {
+    methods: ["POST"]
+    pattern: '/api/v1/collections/:id/items'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'collections.remove_item': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/collections/:id/items/:itemId'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue, ParamValue]
+      params: { id: ParamValue; itemId: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'progress.get_video_progress': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/progress/videos/:seriesId'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { seriesId: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'progress.update_video_progress': {
+    methods: ["PUT"]
+    pattern: '/api/v1/progress/videos/:seriesId'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { seriesId: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'progress.get_blog_progress': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/progress/blogs/:blogId'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { blogId: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+      rawResponse: ExtractRawResponse<unknown>
+    }
+  }
+  'progress.update_blog_progress': {
+    methods: ["PUT"]
+    pattern: '/api/v1/progress/blogs/:blogId'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { blogId: ParamValue }
       query: {}
       response: unknown
       errorResponse: unknown

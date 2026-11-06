@@ -53,6 +53,96 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class BlogSchema extends BaseModel {
+  static $columns = ['content', 'createdAt', 'createdBy', 'deletedAt', 'domainId', 'id', 'isHidden', 'readTime', 'tags', 'thumbnail', 'title', 'updatedAt'] as const
+  $columns = BlogSchema.$columns
+  @column()
+  declare content: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare createdBy: string | null
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare domainId: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare isHidden: boolean
+  @column()
+  declare readTime: string | null
+  @column()
+  declare tags: any | null
+  @column()
+  declare thumbnail: any | null
+  @column()
+  declare title: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class CollectionItemSchema extends BaseModel {
+  static $columns = ['collectionId', 'contentId', 'contentType', 'createdAt', 'deletedAt', 'id', 'progress', 'updatedAt'] as const
+  $columns = CollectionItemSchema.$columns
+  @column()
+  declare collectionId: number
+  @column()
+  declare contentId: string
+  @column()
+  declare contentType: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare progress: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class CollectionSchema extends BaseModel {
+  static $columns = ['createdAt', 'deletedAt', 'description', 'id', 'isDefault', 'name', 'updatedAt', 'userId'] as const
+  $columns = CollectionSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare isDefault: boolean
+  @column()
+  declare name: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare userId: number
+}
+
+export class DomainSchema extends BaseModel {
+  static $columns = ['createdAt', 'deletedAt', 'description', 'id', 'name', 'slug', 'updatedAt'] as const
+  $columns = DomainSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare name: string
+  @column()
+  declare slug: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
 export class RateLimitSchema extends BaseModel {
   static $columns = ['expire', 'key', 'points'] as const
   $columns = RateLimitSchema.$columns
@@ -64,42 +154,130 @@ export class RateLimitSchema extends BaseModel {
   declare points: number
 }
 
-export class SavedBlogSchema extends BaseModel {
-  static $columns = ['blogId', 'body', 'createdAt', 'id', 'title', 'userId'] as const
-  $columns = SavedBlogSchema.$columns
-  @column()
-  declare blogId: number
-  @column()
-  declare body: string | null
+export class SeriesSchema extends BaseModel {
+  static $columns = ['createdAt', 'deletedAt', 'description', 'domainId', 'id', 'isHidden', 'previewVideo', 'tags', 'thumbnail', 'title', 'updatedAt', 'videoDuration', 'videoSrc'] as const
+  $columns = SeriesSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column()
+  declare domainId: number
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare title: string
+  declare isHidden: boolean
   @column()
-  declare userId: number
-}
-
-export class SavedVideoSchema extends BaseModel {
-  static $columns = ['channelName', 'createdAt', 'id', 'thumbnail', 'title', 'userId', 'videoId', 'videoUrl'] as const
-  $columns = SavedVideoSchema.$columns
+  declare previewVideo: string | null
   @column()
-  declare channelName: string | null
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime
-  @column({ isPrimary: true })
-  declare id: number
+  declare tags: any | null
   @column()
   declare thumbnail: string | null
   @column()
   declare title: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare videoDuration: string | null
+  @column()
+  declare videoSrc: string | null
+}
+
+export class SeriesVideosProgressSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'lastPositionSeconds', 'seriesId', 'updatedAt', 'userId', 'videoProgress'] as const
+  $columns = SeriesVideosProgressSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare lastPositionSeconds: number
+  @column()
+  declare seriesId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
   @column()
   declare userId: number
   @column()
-  declare videoId: string
+  declare videoProgress: number
+}
+
+export class UpdateActivitySchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'updatedAt'] as const
+  $columns = UpdateActivitySchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class UserAudioProgressSchema extends BaseModel {
+  static $columns = ['audioProgress', 'bookId', 'chapterAudioId', 'chapterId', 'createdAt', 'id', 'pageId', 'updatedAt', 'userId'] as const
+  $columns = UserAudioProgressSchema.$columns
   @column()
-  declare videoUrl: string
+  declare audioProgress: number
+  @column()
+  declare bookId: number
+  @column()
+  declare chapterAudioId: number
+  @column()
+  declare chapterId: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare pageId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare userId: number
+}
+
+export class UserBlogProgressSchema extends BaseModel {
+  static $columns = ['blogId', 'createdAt', 'id', 'isCompleted', 'lastScrollPosition', 'readingProgress', 'updatedAt', 'userId'] as const
+  $columns = UserBlogProgressSchema.$columns
+  @column()
+  declare blogId: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare isCompleted: boolean
+  @column()
+  declare lastScrollPosition: number
+  @column()
+  declare readingProgress: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare userId: number
+}
+
+export class UserChapterProgressSchema extends BaseModel {
+  static $columns = ['bookId', 'chapterVideoId', 'createdAt', 'id', 'pageId', 'updatedAt', 'userId', 'videoProgress'] as const
+  $columns = UserChapterProgressSchema.$columns
+  @column()
+  declare bookId: number
+  @column()
+  declare chapterVideoId: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare pageId: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+  @column()
+  declare userId: number
+  @column()
+  declare videoProgress: number
 }
 
 export class UserSchema extends BaseModel {
